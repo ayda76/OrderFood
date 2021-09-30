@@ -49,6 +49,10 @@ const updatedTotalAmount=state.totalAmount-existingItem.price;
        
    };
     }
+
+    if(action.type==="CLEAR"){
+        return defaultCart;
+    }
 return defaultCart;
 }
 
@@ -60,11 +64,15 @@ function ContextProvder(props){
     const removeItemHandler = (id)=>{
         dispatchCart({type:'REMOVE',id:id});
     }
+    const clearHandler = ()=>{
+        dispatchCart({type:'CLEAR'});
+    }
 const contextCart={
     items:reduceState.items,
     totalAmount:reduceState.totalAmount,
     addItem:addItemHandler,
-    removeItem:removeItemHandler
+    removeItem:removeItemHandler,
+    clear:clearHandler
 };
 
     return <CartContext.Provider value={contextCart}>{props.children}</CartContext.Provider>
